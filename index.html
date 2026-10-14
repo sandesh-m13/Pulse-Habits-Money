@@ -7,6 +7,8 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>Pulse: Habits & Voice Finance</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="https://placehold.co/192x192/1E1E2C/00E676.png?text=Pulse" />
   <style>
     :root {
       --bg: #12121A;
@@ -604,6 +606,12 @@
 
   renderHabits();
   renderFinance();
+  // Register Service Worker so Android Chrome enables the "Install" button
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW:', err));
+    });
+  }
 </script>
 </body>
 </html>
